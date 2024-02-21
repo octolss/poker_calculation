@@ -4,28 +4,37 @@
 title: Poker calc
 ---
 classDiagram
-    class player {
-        cards
-        status
-        bet
-    }
+  class PokerGame {
+    - deck: Deck
+    - player_hand: Hand
+    - opponent_hand: Hand
+    + __init__()
+    + deal_hands()
+    + calculate_winner()
+}
 
-    class table {
-        cards
-        position
-    }
+class Deck {
+    - cards: list
+    + __init__()
+    + deal_card(): Card
+}
 
-    class calculation {
-       pyt_fun()
-    }
-    class iteration{
-        check_bet()
-        if status != fold
-        table_update_position()
-    }
-    player <-- iteration
-    table <-- iteration
-    calculation <-- player
-    calculation <-- table
-    iteration<-- calculation
+class Hand {
+    - cards: list
+    + __init__()
+    + add_card(card: Card)
+    + __str__(): str
+}
+
+class Card {
+    - suit: str
+    - rank: int
+    + __init__(suit: str, rank: int)
+    + __str__(): str
+}
+
+PokerGame *-- Deck
+PokerGame *-- Hand
+Deck *-- Card
+Hand *-- Card
 ```
